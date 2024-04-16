@@ -37,8 +37,8 @@ namespace KenshuServiceForms.Database
         public DateOnly? start_date { get; set; }
         public DateOnly? end_date { get; set; }
         public int? payment_method { get; set; } 
-        public DateTime? created_at { get; set; }
-        public DateTime? modified_at { get;set; }
+        //public DateTime? created_at { get; set; }
+        //public DateTime? modified_at { get;set; }
     }
     public class T_Charge
     {
@@ -48,8 +48,8 @@ namespace KenshuServiceForms.Database
         public int? amount { get; set; }
         public DateOnly? startDate { get; set; }    
         public DateOnly? endDate { get; set;}
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get; set; }
+        //public DateTime? created_at { get; set; }
+        //public DateTime? updated_at { get; set; }
     }
     public class T_Billing_Data
     {
@@ -66,8 +66,8 @@ namespace KenshuServiceForms.Database
         public int amount { get; set; } 
         public int tax_ratio { get; set; }
         public int total {  get; set; }
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get;set; }
+        //public DateTime? created_at { get; set; }
+        //public DateTime? updated_at { get;set; }
     }
     public class T_Billing_Detail_Data
     {
@@ -80,15 +80,15 @@ namespace KenshuServiceForms.Database
         public string name { get; set; }
         public DateOnly start_date { get; set; }
         public DateOnly end_date { get; set; }
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get; set; }
+        //public DateTime? created_at { get; set; }
+        //public DateTime? updated_at { get; set; }
     }
     public class T_Billing_Status
     {
         public DateOnly billing_ym { get; set; }
         public bool is_commited { get; set; }
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get; set; }
+        //public DateTime? created_at { get; set; }
+        //public DateTime? updated_at { get; set; }
     }
 
 
