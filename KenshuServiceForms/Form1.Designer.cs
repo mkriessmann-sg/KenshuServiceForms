@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem3 = new ListViewItem(new string[] { "", "1", "mail＠mail.com" }, -1);
+            ListViewItem listViewItem1 = new ListViewItem(new string[] { "", "1", "mail＠mail.com" }, -1);
             groupBox1 = new GroupBox();
             MainView = new ListView();
             columnHeader1 = new ColumnHeader();
@@ -43,6 +43,7 @@
             HomeMenuStrip = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
             編集ToolStripMenuItem = new ToolStripMenuItem();
+            料理一覧ToolStripMenuItem = new ToolStripMenuItem();
             管理ToolStripMenuItem = new ToolStripMenuItem();
             検索ToolStripMenuItem = new ToolStripMenuItem();
             検査条件取消ToolStripMenuItem = new ToolStripMenuItem();
@@ -68,8 +69,8 @@
             MainView.Dock = DockStyle.Fill;
             MainView.FullRowSelect = true;
             MainView.GridLines = true;
-            listViewItem3.StateImageIndex = 0;
-            MainView.Items.AddRange(new ListViewItem[] { listViewItem3 });
+            listViewItem1.StateImageIndex = 0;
+            MainView.Items.AddRange(new ListViewItem[] { listViewItem1 });
             MainView.Location = new Point(3, 19);
             MainView.Name = "MainView";
             MainView.Size = new Size(787, 354);
@@ -141,9 +142,16 @@
             // 
             // 編集ToolStripMenuItem
             // 
+            編集ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 料理一覧ToolStripMenuItem });
             編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
             編集ToolStripMenuItem.Size = new Size(43, 20);
             編集ToolStripMenuItem.Text = "編集";
+            // 
+            // 料理一覧ToolStripMenuItem
+            // 
+            料理一覧ToolStripMenuItem.Name = "料理一覧ToolStripMenuItem";
+            料理一覧ToolStripMenuItem.Size = new Size(122, 22);
+            料理一覧ToolStripMenuItem.Text = "料理一覧";
             // 
             // 管理ToolStripMenuItem
             // 
@@ -155,14 +163,14 @@
             // 検索ToolStripMenuItem
             // 
             検索ToolStripMenuItem.Name = "検索ToolStripMenuItem";
-            検索ToolStripMenuItem.Size = new Size(180, 22);
+            検索ToolStripMenuItem.Size = new Size(146, 22);
             検索ToolStripMenuItem.Text = "検索";
             検索ToolStripMenuItem.Click += 検索ToolStripMenuItem_Click;
             // 
             // 検査条件取消ToolStripMenuItem
             // 
             検査条件取消ToolStripMenuItem.Name = "検査条件取消ToolStripMenuItem";
-            検査条件取消ToolStripMenuItem.Size = new Size(180, 22);
+            検査条件取消ToolStripMenuItem.Size = new Size(146, 22);
             検査条件取消ToolStripMenuItem.Text = "検査条件取消";
             検査条件取消ToolStripMenuItem.Click += 検査条件取消ToolStripMenuItem_Click;
             // 
@@ -177,7 +185,7 @@
             Controls.Add(HomeMenuStrip);
             MainMenuStrip = HomeMenuStrip;
             Name = "Form1";
-            Text = "Form1";
+            Text = "社内研修用サービス管理システム";
             groupBox1.ResumeLayout(false);
             HomeMenuStrip.ResumeLayout(false);
             HomeMenuStrip.PerformLayout();
@@ -204,5 +212,6 @@
         private ToolStripMenuItem 管理ToolStripMenuItem;
         private ToolStripMenuItem 検索ToolStripMenuItem;
         private ToolStripMenuItem 検査条件取消ToolStripMenuItem;
+        private ToolStripMenuItem 料理一覧ToolStripMenuItem;
     }
 }
