@@ -19,6 +19,7 @@ namespace KenshuServiceForms.Database
         //TODO: Implement function
         public void CreateNewMemberEntry(T_Member t_Member)
         {
+            
 
         }
         
@@ -62,5 +63,18 @@ namespace KenshuServiceForms.Database
         {
         
         }
+        //TODO:Implement function
+        public int GetHighestIndex(string table) 
+        {
+        switch (table) {
+                case "Members":
+                    return 0;
+            
+            
+            }
+        
+            return 0;
+        }
+        
     }
 }
