@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 namespace KenshuServiceForms.Database
 {
-    internal class KenshuDBContext : DbContext
+    public class Model : DbContext
     {
-        //public KenshuDBContext(DbContextOptions<KenshuDBContext> options) : base(options)
-        //{
+        public Model(DbContextOptions<Model> options) : base(options)
+        {
 
-        //}
+        }
 
         public DbSet<T_Member> Members { get; set; }
         public DbSet<T_Charge> Charges { get; set; }

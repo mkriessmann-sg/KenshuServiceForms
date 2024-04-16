@@ -11,11 +11,11 @@ namespace KenshuServiceForms.Database
 {
     internal class KenshuDBHandler
     {
-        private readonly KenshuDBContext context;
+        private readonly Model context;
 
-        public KenshuDBHandler (KenshuDBContext context)
+        public KenshuDBHandler ()
         {
-            this.context = context;
+            
         }
         
         public void CreateNewMemberEntry(T_Member t_Member)
@@ -123,18 +123,24 @@ namespace KenshuServiceForms.Database
         
         public List<T_Member> SearchInMembers(string name, string email)
         {
-            IQueryable<T_Member> query = context.Members.AsQueryable();
-
-            if (name != null)
+            if (context.Members != null)
             {
-                query = query.Where(m => m.name.Contains(name));
-            }
+                IQueryable<T_Member> query = context.Members.AsQueryable();
 
-            if (email != null)
-            {
-                query = query.Where(m => m.mail.Contains(email));
+
+                if (name != null)
+                {
+                    query = query.Where(m => m.name.Contains(name));
+                }
+
+                if (email != null)
+                {
+                    query = query.Where(m => m.mail.Contains(email));
+                }
+                return query.ToList();
             }
-            return query.ToList();
+            return null;
+
         }
         //TODO:Atomawashi
         public void CreateBillingDetails()

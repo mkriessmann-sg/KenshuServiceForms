@@ -64,6 +64,7 @@
             MailSearchBox.Name = "MailSearchBox";
             MailSearchBox.Size = new Size(162, 23);
             MailSearchBox.TabIndex = 2;
+            MailSearchBox.TextChanged += MailSearchBox_TextChanged;
             // 
             // NameSearchBox
             // 

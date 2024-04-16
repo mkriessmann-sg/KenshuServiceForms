@@ -26,5 +26,10 @@ namespace KenshuServiceForms
         {
             this.Close();
         }
+
+        private void MailSearchBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

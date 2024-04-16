@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem1 = new ListViewItem(new string[] { "", "1", "mail＠mail.com" }, -1);
+            ListViewItem listViewItem2 = new ListViewItem(new string[] { "", "1", "mail＠mail.com" }, -1);
             groupBox1 = new GroupBox();
-            MainView = new ListView();
+            result = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
@@ -41,19 +41,20 @@
             AddButton = new Button();
             DeleteButton = new Button();
             HomeMenuStrip = new MenuStrip();
-            toolStripMenuItem1 = new ToolStripMenuItem();
-            編集ToolStripMenuItem = new ToolStripMenuItem();
-            料理一覧ToolStripMenuItem = new ToolStripMenuItem();
-            管理ToolStripMenuItem = new ToolStripMenuItem();
-            検索ToolStripMenuItem = new ToolStripMenuItem();
-            検査条件取消ToolStripMenuItem = new ToolStripMenuItem();
+            FileToolStripMenuItem = new ToolStripMenuItem();
+            QuitToolStripMenuItem = new ToolStripMenuItem();
+            EditToolStripMenuItem = new ToolStripMenuItem();
+            SearchToolStripMenuItem = new ToolStripMenuItem();
+            ClearToolStripMenuItem = new ToolStripMenuItem();
+            ManagementToolStripMenuItem = new ToolStripMenuItem();
+            PricemanToolStripMenuItem = new ToolStripMenuItem();
             groupBox1.SuspendLayout();
             HomeMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(MainView);
+            groupBox1.Controls.Add(result);
             groupBox1.Location = new Point(5, 24);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(793, 376);
@@ -61,22 +62,22 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
             // 
-            // MainView
+            // result
             // 
-            MainView.AllowColumnReorder = true;
-            MainView.BackColor = SystemColors.HighlightText;
-            MainView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
-            MainView.Dock = DockStyle.Fill;
-            MainView.FullRowSelect = true;
-            MainView.GridLines = true;
-            listViewItem1.StateImageIndex = 0;
-            MainView.Items.AddRange(new ListViewItem[] { listViewItem1 });
-            MainView.Location = new Point(3, 19);
-            MainView.Name = "MainView";
-            MainView.Size = new Size(787, 354);
-            MainView.TabIndex = 1;
-            MainView.UseCompatibleStateImageBehavior = false;
-            MainView.View = View.Details;
+            result.AllowColumnReorder = true;
+            result.BackColor = SystemColors.HighlightText;
+            result.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
+            result.Dock = DockStyle.Fill;
+            result.FullRowSelect = true;
+            result.GridLines = true;
+            listViewItem2.StateImageIndex = 0;
+            result.Items.AddRange(new ListViewItem[] { listViewItem2 });
+            result.Location = new Point(3, 19);
+            result.Name = "result";
+            result.Size = new Size(787, 354);
+            result.TabIndex = 1;
+            result.UseCompatibleStateImageBehavior = false;
+            result.View = View.Details;
             // 
             // columnHeader1
             // 
@@ -127,52 +128,61 @@
             // 
             // HomeMenuStrip
             // 
-            HomeMenuStrip.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, 編集ToolStripMenuItem, 管理ToolStripMenuItem });
+            HomeMenuStrip.Items.AddRange(new ToolStripItem[] { FileToolStripMenuItem, EditToolStripMenuItem, ManagementToolStripMenuItem });
             HomeMenuStrip.Location = new Point(0, 0);
             HomeMenuStrip.Name = "HomeMenuStrip";
             HomeMenuStrip.Size = new Size(800, 24);
             HomeMenuStrip.TabIndex = 4;
             HomeMenuStrip.Text = "menuStrip1";
             // 
-            // toolStripMenuItem1
+            // FileToolStripMenuItem
             // 
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(53, 20);
-            toolStripMenuItem1.Text = "ファイル";
+            FileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { QuitToolStripMenuItem });
+            FileToolStripMenuItem.Name = "FileToolStripMenuItem";
+            FileToolStripMenuItem.Size = new Size(53, 20);
+            FileToolStripMenuItem.Text = "ファイル";
             // 
-            // 編集ToolStripMenuItem
+            // QuitToolStripMenuItem
             // 
-            編集ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 料理一覧ToolStripMenuItem });
-            編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
-            編集ToolStripMenuItem.Size = new Size(43, 20);
-            編集ToolStripMenuItem.Text = "編集";
+            QuitToolStripMenuItem.Name = "QuitToolStripMenuItem";
+            QuitToolStripMenuItem.Size = new Size(180, 22);
+            QuitToolStripMenuItem.Text = "終了";
+            QuitToolStripMenuItem.Click += QuitToolStripMenuItem_Click;
             // 
-            // 料理一覧ToolStripMenuItem
+            // EditToolStripMenuItem
             // 
-            料理一覧ToolStripMenuItem.Name = "料理一覧ToolStripMenuItem";
-            料理一覧ToolStripMenuItem.Size = new Size(122, 22);
-            料理一覧ToolStripMenuItem.Text = "料理一覧";
+            EditToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { SearchToolStripMenuItem, ClearToolStripMenuItem });
+            EditToolStripMenuItem.Name = "EditToolStripMenuItem";
+            EditToolStripMenuItem.Size = new Size(43, 20);
+            EditToolStripMenuItem.Text = "編集";
             // 
-            // 管理ToolStripMenuItem
+            // SearchToolStripMenuItem
             // 
-            管理ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 検索ToolStripMenuItem, 検査条件取消ToolStripMenuItem });
-            管理ToolStripMenuItem.Name = "管理ToolStripMenuItem";
-            管理ToolStripMenuItem.Size = new Size(43, 20);
-            管理ToolStripMenuItem.Text = "管理";
+            SearchToolStripMenuItem.Name = "SearchToolStripMenuItem";
+            SearchToolStripMenuItem.Size = new Size(180, 22);
+            SearchToolStripMenuItem.Text = "検索";
+            SearchToolStripMenuItem.Click += SearchToolStripMenuItem_Click;
             // 
-            // 検索ToolStripMenuItem
+            // ClearToolStripMenuItem
             // 
-            検索ToolStripMenuItem.Name = "検索ToolStripMenuItem";
-            検索ToolStripMenuItem.Size = new Size(146, 22);
-            検索ToolStripMenuItem.Text = "検索";
-            検索ToolStripMenuItem.Click += 検索ToolStripMenuItem_Click;
+            ClearToolStripMenuItem.Name = "ClearToolStripMenuItem";
+            ClearToolStripMenuItem.Size = new Size(180, 22);
+            ClearToolStripMenuItem.Text = "検査条件解除";
+            ClearToolStripMenuItem.Click += ClearToolStripMenuItem_Click;
             // 
-            // 検査条件取消ToolStripMenuItem
+            // ManagementToolStripMenuItem
             // 
-            検査条件取消ToolStripMenuItem.Name = "検査条件取消ToolStripMenuItem";
-            検査条件取消ToolStripMenuItem.Size = new Size(146, 22);
-            検査条件取消ToolStripMenuItem.Text = "検査条件取消";
-            検査条件取消ToolStripMenuItem.Click += 検査条件取消ToolStripMenuItem_Click;
+            ManagementToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { PricemanToolStripMenuItem });
+            ManagementToolStripMenuItem.Name = "ManagementToolStripMenuItem";
+            ManagementToolStripMenuItem.Size = new Size(43, 20);
+            ManagementToolStripMenuItem.Text = "管理";
+            // 
+            // PricemanToolStripMenuItem
+            // 
+            PricemanToolStripMenuItem.Name = "PricemanToolStripMenuItem";
+            PricemanToolStripMenuItem.Size = new Size(122, 22);
+            PricemanToolStripMenuItem.Text = "料金情報";
+            PricemanToolStripMenuItem.Click += PricemanToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -186,6 +196,7 @@
             MainMenuStrip = HomeMenuStrip;
             Name = "Form1";
             Text = "社内研修用サービス管理システム";
+            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             HomeMenuStrip.ResumeLayout(false);
             HomeMenuStrip.PerformLayout();
@@ -196,7 +207,7 @@
         #endregion
 
         private GroupBox groupBox1;
-        private ListView MainView;
+        private ListView result;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
@@ -207,11 +218,12 @@
         private Button AddButton;
         private Button DeleteButton;
         private MenuStrip HomeMenuStrip;
-        private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem 編集ToolStripMenuItem;
-        private ToolStripMenuItem 管理ToolStripMenuItem;
-        private ToolStripMenuItem 検索ToolStripMenuItem;
-        private ToolStripMenuItem 検査条件取消ToolStripMenuItem;
-        private ToolStripMenuItem 料理一覧ToolStripMenuItem;
+        private ToolStripMenuItem FileToolStripMenuItem;
+        private ToolStripMenuItem EditToolStripMenuItem;
+        private ToolStripMenuItem ManagementToolStripMenuItem;
+        private ToolStripMenuItem QuitToolStripMenuItem;
+        private ToolStripMenuItem SearchToolStripMenuItem;
+        private ToolStripMenuItem ClearToolStripMenuItem;
+        private ToolStripMenuItem PricemanToolStripMenuItem;
     }
 }

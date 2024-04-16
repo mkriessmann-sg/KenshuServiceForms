@@ -14,8 +14,9 @@ namespace KenshuServiceForms
     public partial class AddEdit : Form
     {
         string mode;
-        T_Member member;
-        public AddEdit(string _mode, T_Member _member)
+        T_Member? member;
+        KenshuDBHandler handler =  new KenshuDBHandler();
+        public AddEdit(string _mode, T_Member? _member)
         {
             InitializeComponent();
             mode = _mode;
@@ -36,7 +37,9 @@ namespace KenshuServiceForms
             }
             else if (mode == "新規追加")
             {
-                //empty for now since nothing needs to be executed but default leads to error
+                member = new T_Member();
+                member.member_id = Convert.ToInt32(handler.GetHighestIndex("Members"));
+                MemberIDTextLabelAddEdit.Text = Convert.ToString(member.member_id);
             }
             else
             {
@@ -47,6 +50,8 @@ namespace KenshuServiceForms
         //TODO:Implement functions
         private void RegisterButtonAddEdit_Click(object sender, EventArgs e)
         {
+           
+
             this.Close();
         }
 
