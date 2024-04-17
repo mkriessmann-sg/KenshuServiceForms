@@ -3,21 +3,24 @@ namespace KenshuServiceForms
     public partial class Form1 : Form
     {
 
-        string name = null;
-        string email = null;
+        public string name = null;
+        public string email = null;
         List<T_Member> currentMembers = new List<T_Member>();
         private void Form1_Load(object sender, EventArgs e)
         {
+            UpdateList();
 
         }
         public Form1()
         {
             InitializeComponent();
-            UpdateList();
+
         }
 
         private void UpdateList()
         {
+
+            result.Items.Clear();
             KenshuDBHandler handler = new KenshuDBHandler();
             currentMembers = handler.SearchInMembers(name, email);
             if (currentMembers != null)
@@ -30,9 +33,10 @@ namespace KenshuServiceForms
                     item.SubItems.Add(member.name);
                     item.SubItems.Add(member.address);
                     item.SubItems.Add(member.start_date.ToString());
-                    item.SubItems.Add((member.end_date?.ToString()));
+                    item.SubItems.Add((member.end_date.ToString()));
                     //TODO:Show payment method as string
-                    item.SubItems.Add(member.payment_method.ToString());
+                    if (member.payment_method == 0) { item.SubItems.Add("クレジット"); }
+                    if (member.payment_method == 1) { item.SubItems.Add("口座振込"); }
                     result.Items.Add(item);
                 }
             }
@@ -42,7 +46,7 @@ namespace KenshuServiceForms
 
         private void SearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Search search = new Search();
+            Search search = new Search(this);
             search.ShowDialog();
             UpdateList();
         }
@@ -51,6 +55,7 @@ namespace KenshuServiceForms
         {
             AddEdit addEdit = new AddEdit("新規追加", null);
             addEdit.ShowDialog();
+            UpdateList();
         }
 
         private void ClearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,6 +74,7 @@ namespace KenshuServiceForms
         {
             Charges charges = new Charges();
             charges.ShowDialog();
+            UpdateList();
         }
         //TODO:implement selection 
         private void result_MouseClick(object sender, MouseEventArgs e)
@@ -79,8 +85,21 @@ namespace KenshuServiceForms
                 selectedMemberID = Convert.ToInt16(item.Text);
             }
 
-            AddEdit addEdit = new AddEdit("編集", null);
+            AddEdit addEdit = new AddEdit("編集", selectedMemberID);
             addEdit.ShowDialog();
+            UpdateList();
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            int selectedMemberID = 0;
+            foreach (ListViewItem item in result.SelectedItems)
+            {
+                selectedMemberID = Convert.ToInt16(item.Text);
+            }
+            KenshuDBHandler handler = new KenshuDBHandler();
+            handler.DeleteEntryInTable(selectedMemberID, "Members");
+            UpdateList();   
         }
     }
 }

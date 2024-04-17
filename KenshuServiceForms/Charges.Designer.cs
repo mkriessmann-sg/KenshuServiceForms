@@ -36,7 +36,6 @@
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
-            columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             columnHeader6 = new ColumnHeader();
             ChargesCloseButton = new Button();
@@ -77,7 +76,7 @@
             // 
             ChargesView.AllowColumnReorder = true;
             ChargesView.BackColor = SystemColors.HighlightText;
-            ChargesView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6 });
+            ChargesView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader5, columnHeader6 });
             ChargesView.Dock = DockStyle.Fill;
             ChargesView.FullRowSelect = true;
             ChargesView.GridLines = true;
@@ -89,6 +88,7 @@
             ChargesView.TabIndex = 1;
             ChargesView.UseCompatibleStateImageBehavior = false;
             ChargesView.View = View.Details;
+            ChargesView.MouseDoubleClick += ChargesView_MouseDoubleClick;
             // 
             // columnHeader1
             // 
@@ -101,10 +101,6 @@
             // columnHeader3
             // 
             columnHeader3.Text = "月額料金";
-            // 
-            // columnHeader4
-            // 
-            columnHeader4.Text = "住所";
             // 
             // columnHeader5
             // 
@@ -148,7 +144,6 @@
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
-        private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private ColumnHeader columnHeader6;
         private Button ChargesCloseButton;

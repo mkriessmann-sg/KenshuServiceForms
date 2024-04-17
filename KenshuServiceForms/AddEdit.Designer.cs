@@ -47,7 +47,7 @@
             MailErrorLabelAddEdit = new Label();
             NameErrorLabelAddEdit = new Label();
             AddressErrorLabelAddEdit = new Label();
-            label2 = new Label();
+            JoinDateErrorLabelAddEdit = new Label();
             PaymentMethodErrorLabelAddEdit = new Label();
             SuspendLayout();
             // 
@@ -189,6 +189,8 @@
             JoinDatePickerAddEdit.Name = "JoinDatePickerAddEdit";
             JoinDatePickerAddEdit.Size = new Size(174, 23);
             JoinDatePickerAddEdit.TabIndex = 23;
+            JoinDatePickerAddEdit.Value = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+            JoinDatePickerAddEdit.ValueChanged += JoinDatePickerAddEdit_ValueChanged;
             // 
             // LeaveDatePickerAddEdit
             // 
@@ -196,6 +198,8 @@
             LeaveDatePickerAddEdit.Name = "LeaveDatePickerAddEdit";
             LeaveDatePickerAddEdit.Size = new Size(174, 23);
             LeaveDatePickerAddEdit.TabIndex = 24;
+            LeaveDatePickerAddEdit.Value = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+            LeaveDatePickerAddEdit.ValueChanged += LeaveDatePickerAddEdit_ValueChanged;
             // 
             // MailErrorLabelAddEdit
             // 
@@ -230,16 +234,16 @@
             AddressErrorLabelAddEdit.Text = "ErrorMessage";
             AddressErrorLabelAddEdit.Visible = false;
             // 
-            // label2
+            // JoinDateErrorLabelAddEdit
             // 
-            label2.AutoSize = true;
-            label2.ForeColor = Color.Red;
-            label2.Location = new Point(99, 198);
-            label2.Name = "label2";
-            label2.Size = new Size(78, 15);
-            label2.TabIndex = 30;
-            label2.Text = "ErrorMessage";
-            label2.Visible = false;
+            JoinDateErrorLabelAddEdit.AutoSize = true;
+            JoinDateErrorLabelAddEdit.ForeColor = Color.Red;
+            JoinDateErrorLabelAddEdit.Location = new Point(99, 198);
+            JoinDateErrorLabelAddEdit.Name = "JoinDateErrorLabelAddEdit";
+            JoinDateErrorLabelAddEdit.Size = new Size(78, 15);
+            JoinDateErrorLabelAddEdit.TabIndex = 30;
+            JoinDateErrorLabelAddEdit.Text = "ErrorMessage";
+            JoinDateErrorLabelAddEdit.Visible = false;
             // 
             // PaymentMethodErrorLabelAddEdit
             // 
@@ -258,7 +262,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(306, 351);
             Controls.Add(PaymentMethodErrorLabelAddEdit);
-            Controls.Add(label2);
+            Controls.Add(JoinDateErrorLabelAddEdit);
             Controls.Add(AddressErrorLabelAddEdit);
             Controls.Add(NameErrorLabelAddEdit);
             Controls.Add(MailErrorLabelAddEdit);
@@ -310,7 +314,7 @@
         private Label MailErrorLabelAddEdit;
         private Label NameErrorLabelAddEdit;
         private Label AddressErrorLabelAddEdit;
-        private Label label2;
+        private Label JoinDateErrorLabelAddEdit;
         private Label PaymentMethodErrorLabelAddEdit;
     }
 }

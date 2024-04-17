@@ -38,25 +38,30 @@
             AmountLabelAddEditCharges = new LinkLabel();
             ChargeNameLabelAddEditCharges = new LinkLabel();
             endDateLabelAddEditCharges = new Label();
+            ChargeNameErrorLabelAddEditCharges = new Label();
+            AmountErrorLabelAddEditCharges = new Label();
+            StartDateErrorLabelAddEditCharges = new Label();
             SuspendLayout();
             // 
             // EndDatePickerAddEditCharges
             // 
-            EndDatePickerAddEditCharges.Location = new Point(106, 99);
+            EndDatePickerAddEditCharges.Location = new Point(106, 148);
             EndDatePickerAddEditCharges.Name = "EndDatePickerAddEditCharges";
             EndDatePickerAddEditCharges.Size = new Size(174, 23);
             EndDatePickerAddEditCharges.TabIndex = 40;
+            EndDatePickerAddEditCharges.ValueChanged += EndDatePickerAddEditCharges_ValueChanged;
             // 
             // StartDatePickerAddEditCharges
             // 
-            StartDatePickerAddEditCharges.Location = new Point(106, 70);
+            StartDatePickerAddEditCharges.Location = new Point(106, 103);
             StartDatePickerAddEditCharges.Name = "StartDatePickerAddEditCharges";
             StartDatePickerAddEditCharges.Size = new Size(174, 23);
             StartDatePickerAddEditCharges.TabIndex = 39;
+            StartDatePickerAddEditCharges.ValueChanged += StartDatePickerAddEditCharges_ValueChanged;
             // 
             // CancelButtonAddEdit
             // 
-            CancelButtonAddEdit.Location = new Point(205, 128);
+            CancelButtonAddEdit.Location = new Point(205, 177);
             CancelButtonAddEdit.Name = "CancelButtonAddEdit";
             CancelButtonAddEdit.Size = new Size(75, 23);
             CancelButtonAddEdit.TabIndex = 36;
@@ -66,7 +71,7 @@
             // 
             // SaveButtonAddEditCharges
             // 
-            SaveButtonAddEditCharges.Location = new Point(106, 128);
+            SaveButtonAddEditCharges.Location = new Point(106, 177);
             SaveButtonAddEditCharges.Name = "SaveButtonAddEditCharges";
             SaveButtonAddEditCharges.Size = new Size(75, 23);
             SaveButtonAddEditCharges.TabIndex = 35;
@@ -76,7 +81,7 @@
             // 
             // AmountTextBoxAddEditCharges
             // 
-            AmountTextBoxAddEditCharges.Location = new Point(106, 41);
+            AmountTextBoxAddEditCharges.Location = new Point(106, 59);
             AmountTextBoxAddEditCharges.Name = "AmountTextBoxAddEditCharges";
             AmountTextBoxAddEditCharges.Size = new Size(174, 23);
             AmountTextBoxAddEditCharges.TabIndex = 33;
@@ -92,18 +97,18 @@
             // 
             StartDateLabelAddEditCharges.AutoSize = true;
             StartDateLabelAddEditCharges.LinkColor = Color.Black;
-            StartDateLabelAddEditCharges.Location = new Point(57, 76);
+            StartDateLabelAddEditCharges.Location = new Point(33, 109);
             StartDateLabelAddEditCharges.Name = "StartDateLabelAddEditCharges";
-            StartDateLabelAddEditCharges.Size = new Size(43, 15);
+            StartDateLabelAddEditCharges.Size = new Size(67, 15);
             StartDateLabelAddEditCharges.TabIndex = 30;
             StartDateLabelAddEditCharges.TabStop = true;
-            StartDateLabelAddEditCharges.Text = "加入日";
+            StartDateLabelAddEditCharges.Text = "適用開始日";
             // 
             // AmountLabelAddEditCharges
             // 
             AmountLabelAddEditCharges.AutoSize = true;
             AmountLabelAddEditCharges.LinkColor = Color.Black;
-            AmountLabelAddEditCharges.Location = new Point(45, 44);
+            AmountLabelAddEditCharges.Location = new Point(45, 62);
             AmountLabelAddEditCharges.Name = "AmountLabelAddEditCharges";
             AmountLabelAddEditCharges.Size = new Size(55, 15);
             AmountLabelAddEditCharges.TabIndex = 28;
@@ -124,17 +129,53 @@
             // endDateLabelAddEditCharges
             // 
             endDateLabelAddEditCharges.AutoSize = true;
-            endDateLabelAddEditCharges.Location = new Point(57, 105);
+            endDateLabelAddEditCharges.Location = new Point(33, 154);
             endDateLabelAddEditCharges.Name = "endDateLabelAddEditCharges";
-            endDateLabelAddEditCharges.Size = new Size(43, 15);
+            endDateLabelAddEditCharges.Size = new Size(67, 15);
             endDateLabelAddEditCharges.TabIndex = 26;
-            endDateLabelAddEditCharges.Text = "解約日";
+            endDateLabelAddEditCharges.Text = "適用終了日";
+            // 
+            // ChargeNameErrorLabelAddEditCharges
+            // 
+            ChargeNameErrorLabelAddEditCharges.AutoSize = true;
+            ChargeNameErrorLabelAddEditCharges.ForeColor = Color.Red;
+            ChargeNameErrorLabelAddEditCharges.Location = new Point(106, 38);
+            ChargeNameErrorLabelAddEditCharges.Name = "ChargeNameErrorLabelAddEditCharges";
+            ChargeNameErrorLabelAddEditCharges.Size = new Size(78, 15);
+            ChargeNameErrorLabelAddEditCharges.TabIndex = 41;
+            ChargeNameErrorLabelAddEditCharges.Text = "ErrorMessage";
+            ChargeNameErrorLabelAddEditCharges.Visible = false;
+            // 
+            // AmountErrorLabelAddEditCharges
+            // 
+            AmountErrorLabelAddEditCharges.AutoSize = true;
+            AmountErrorLabelAddEditCharges.ForeColor = Color.Red;
+            AmountErrorLabelAddEditCharges.Location = new Point(106, 85);
+            AmountErrorLabelAddEditCharges.Name = "AmountErrorLabelAddEditCharges";
+            AmountErrorLabelAddEditCharges.Size = new Size(78, 15);
+            AmountErrorLabelAddEditCharges.TabIndex = 42;
+            AmountErrorLabelAddEditCharges.Text = "ErrorMessage";
+            AmountErrorLabelAddEditCharges.Visible = false;
+            // 
+            // StartDateErrorLabelAddEditCharges
+            // 
+            StartDateErrorLabelAddEditCharges.AutoSize = true;
+            StartDateErrorLabelAddEditCharges.ForeColor = Color.Red;
+            StartDateErrorLabelAddEditCharges.Location = new Point(106, 129);
+            StartDateErrorLabelAddEditCharges.Name = "StartDateErrorLabelAddEditCharges";
+            StartDateErrorLabelAddEditCharges.Size = new Size(78, 15);
+            StartDateErrorLabelAddEditCharges.TabIndex = 43;
+            StartDateErrorLabelAddEditCharges.Text = "ErrorMessage";
+            StartDateErrorLabelAddEditCharges.Visible = false;
             // 
             // ChargesAddEdit
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(358, 191);
+            ClientSize = new Size(358, 247);
+            Controls.Add(StartDateErrorLabelAddEditCharges);
+            Controls.Add(AmountErrorLabelAddEditCharges);
+            Controls.Add(ChargeNameErrorLabelAddEditCharges);
             Controls.Add(EndDatePickerAddEditCharges);
             Controls.Add(StartDatePickerAddEditCharges);
             Controls.Add(CancelButtonAddEdit);
@@ -164,5 +205,8 @@
         private LinkLabel AmountLabelAddEditCharges;
         private LinkLabel ChargeNameLabelAddEditCharges;
         private Label endDateLabelAddEditCharges;
+        private Label ChargeNameErrorLabelAddEditCharges;
+        private Label AmountErrorLabelAddEditCharges;
+        private Label StartDateErrorLabelAddEditCharges;
     }
 }
