@@ -123,22 +123,22 @@ namespace KenshuServiceForms
 
         public List<T_Member> SearchInMembers(string name, string email)
         {
-            if (context.Members != null)
-            {
-                IQueryable<T_Member> query = context.Members.AsQueryable();
+            //if (context.Members != null)
+            //{
+            //    IQueryable<T_Member> query = context.Members.AsQueryable();
 
 
-                if (name != null)
-                {
-                    query = query.Where(m => m.name.Contains(name));
-                }
+            //    if (name != null)
+            //    {
+            //        query = query.Where(m => m.name.Contains(name));
+            //    }
 
-                if (email != null)
-                {
-                    query = query.Where(m => m.mail.Contains(email));
-                }
-                return query.ToList();
-            }
+            //    if (email != null)
+            //    {
+            //        query = query.Where(m => m.mail.Contains(email));
+            //    }
+            //    return query.ToList();
+            //}
             return null;
 
         }

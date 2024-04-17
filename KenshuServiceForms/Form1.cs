@@ -20,42 +20,43 @@ namespace KenshuServiceForms
         {
             KenshuDBHandler handler = new KenshuDBHandler();
             currentMembers = handler.SearchInMembers(name, email);
-            foreach ( T_Member member in currentMembers)
+            if (currentMembers != null)
             {
-                ListViewItem item = new ListViewItem(member.member_id.ToString());
+                foreach (T_Member member in currentMembers)
+                {
+                    ListViewItem item = new ListViewItem(member.member_id.ToString());
 
-                item.SubItems.Add(member.mail);
-                item.SubItems.Add(member.name);
-                item.SubItems.Add(member.address);
-                item.SubItems.Add(member.start_date.ToString());
-                item.SubItems.Add((member.end_date?.ToString()));
-                //TODO:Show payment method as string
-                item.SubItems.Add(member.payment_method.ToString());
-                result.Items.Add(item);
+                    item.SubItems.Add(member.mail);
+                    item.SubItems.Add(member.name);
+                    item.SubItems.Add(member.address);
+                    item.SubItems.Add(member.start_date.ToString());
+                    item.SubItems.Add((member.end_date?.ToString()));
+                    //TODO:Show payment method as string
+                    item.SubItems.Add(member.payment_method.ToString());
+                    result.Items.Add(item);
+                }
             }
             result.Refresh();
 
         }
 
-
-        
         private void SearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Search search = new Search();
             search.ShowDialog();
             UpdateList();
         }
-        
+
         private void AddButton_Click(object sender, EventArgs e)
         {
-            AddEdit addEdit = new AddEdit("êVãKí«â¡", null) ;
+            AddEdit addEdit = new AddEdit("êVãKí«â¡", null);
             addEdit.ShowDialog();
         }
-        
+
         private void ClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             email = null;
-            name = null; 
+            name = null;
             UpdateList();
         }
 
@@ -69,7 +70,17 @@ namespace KenshuServiceForms
             Charges charges = new Charges();
             charges.ShowDialog();
         }
+        //TODO:implement selection 
+        private void result_MouseClick(object sender, MouseEventArgs e)
+        {
+            int selectedMemberID = 0;
+            foreach (ListViewItem item in result.SelectedItems)
+            {
+                selectedMemberID = Convert.ToInt16(item.Text);
+            }
 
-        
+            AddEdit addEdit = new AddEdit("ï“èW", null);
+            addEdit.ShowDialog();
+        }
     }
 }

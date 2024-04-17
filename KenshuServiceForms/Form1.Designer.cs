@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem2 = new ListViewItem(new string[] { "", "1", "mail＠mail.com" }, -1);
+            ListViewItem listViewItem1 = new ListViewItem(new string[] { "", "1", "mail＠mail.com" }, -1);
             groupBox1 = new GroupBox();
             result = new ListView();
             columnHeader1 = new ColumnHeader();
@@ -70,14 +70,15 @@
             result.Dock = DockStyle.Fill;
             result.FullRowSelect = true;
             result.GridLines = true;
-            listViewItem2.StateImageIndex = 0;
-            result.Items.AddRange(new ListViewItem[] { listViewItem2 });
+            listViewItem1.StateImageIndex = 0;
+            result.Items.AddRange(new ListViewItem[] { listViewItem1 });
             result.Location = new Point(3, 19);
             result.Name = "result";
             result.Size = new Size(787, 354);
             result.TabIndex = 1;
             result.UseCompatibleStateImageBehavior = false;
             result.View = View.Details;
+            result.MouseClick += result_MouseClick;
             // 
             // columnHeader1
             // 
@@ -145,7 +146,7 @@
             // QuitToolStripMenuItem
             // 
             QuitToolStripMenuItem.Name = "QuitToolStripMenuItem";
-            QuitToolStripMenuItem.Size = new Size(180, 22);
+            QuitToolStripMenuItem.Size = new Size(98, 22);
             QuitToolStripMenuItem.Text = "終了";
             QuitToolStripMenuItem.Click += QuitToolStripMenuItem_Click;
             // 
@@ -159,14 +160,14 @@
             // SearchToolStripMenuItem
             // 
             SearchToolStripMenuItem.Name = "SearchToolStripMenuItem";
-            SearchToolStripMenuItem.Size = new Size(180, 22);
+            SearchToolStripMenuItem.Size = new Size(146, 22);
             SearchToolStripMenuItem.Text = "検索";
             SearchToolStripMenuItem.Click += SearchToolStripMenuItem_Click;
             // 
             // ClearToolStripMenuItem
             // 
             ClearToolStripMenuItem.Name = "ClearToolStripMenuItem";
-            ClearToolStripMenuItem.Size = new Size(180, 22);
+            ClearToolStripMenuItem.Size = new Size(146, 22);
             ClearToolStripMenuItem.Text = "検査条件解除";
             ClearToolStripMenuItem.Click += ClearToolStripMenuItem_Click;
             // 
