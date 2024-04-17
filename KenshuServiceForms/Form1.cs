@@ -1,5 +1,3 @@
-using KenshuServiceForms.Database;
-
 namespace KenshuServiceForms
 {
     public partial class Form1 : Form

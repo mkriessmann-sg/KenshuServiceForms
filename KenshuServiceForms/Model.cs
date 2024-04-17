@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-namespace KenshuServiceForms.Database
+namespace KenshuServiceForms
 {
-    public class Model : DbContext
+    public class ModelContext : DbContext
     {
-        public Model(DbContextOptions<Model> options) : base(options)
-        {
-
-        }
 
         public DbSet<T_Member> Members { get; set; }
         public DbSet<T_Charge> Charges { get; set; }
@@ -20,9 +17,23 @@ namespace KenshuServiceForms.Database
         public DbSet<T_Billing_Detail_Data> Billing_Data_Detail { get; set; }
         public DbSet<T_Billing_Status> Billing_Status { get; set; }
 
+        public ModelContext(DbContextOptions<ModelContext> options) : base(options)
+        {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<T_Billing_Data>()
+                .HasKey(bd => new { bd.billing_ym, bd.member_id });
+
+            modelBuilder.Entity<T_Billing_Detail_Data>()
+                .HasKey(bdd => new { bdd.billing_ym, bdd.member_id, bdd.charge_id });
+
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=172.27.200.231;Database=kmarcodb;Username=kmarco;Password=kmarco");
+            optionsBuilder.UseNpgsql("Host=172.27.200.231;Port=5432;Database=kmarcodb;Username=kmarco;Password=kmarco");
         }
 
     }
@@ -36,7 +47,7 @@ namespace KenshuServiceForms.Database
         public string? address { get; set; }
         public DateOnly? start_date { get; set; }
         public DateOnly? end_date { get; set; }
-        public int? payment_method { get; set; } 
+        public int? payment_method { get; set; }
         //public DateTime? created_at { get; set; }
         //public DateTime? modified_at { get;set; }
     }
@@ -46,36 +57,45 @@ namespace KenshuServiceForms.Database
         [Required]
         public string charge_name { get; set; }
         public int? amount { get; set; }
-        public DateOnly? startDate { get; set; }    
-        public DateOnly? endDate { get; set;}
+        public DateOnly? startDate { get; set; }
+        public DateOnly? endDate { get; set; }
         //public DateTime? created_at { get; set; }
         //public DateTime? updated_at { get; set; }
     }
     public class T_Billing_Data
     {
-        [Key]
+        //[Key]
+        //[Column(Order = 0)]
         public DateOnly billing_ym { get; set; }
-        [Key]
+
+        //[Key]
+        //[Column(Order = 1)]
         public int member_id { get; set; }
+
         public string mail { get; set; }
         public string name { get; set; }
         public string address { get; set; }
         public DateOnly member_start_date { get; set; }
         public DateOnly member_end_date { get; set; }
         public int payment_method { get; set; }
-        public int amount { get; set; } 
+        public int amount { get; set; }
         public int tax_ratio { get; set; }
-        public int total {  get; set; }
+        public int total { get; set; }
         //public DateTime? created_at { get; set; }
         //public DateTime? updated_at { get;set; }
     }
     public class T_Billing_Detail_Data
     {
-        [Key]
+        //[Key]
+        //[Column(Order = 0)]
         public DateOnly billing_ym { get; set; }
-        [Key]
+
+        //[Key]
+        //[Column(Order = 1)]
         public int member_id { get; set; }
-        [Key]
+
+        //[Key]
+        //[Column(Order = 2)]
         public int charge_id { get; set; }
         public string name { get; set; }
         public DateOnly start_date { get; set; }

@@ -7,32 +7,32 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KenshuServiceForms.Database
+namespace KenshuServiceForms
 {
     internal class KenshuDBHandler
     {
-        private readonly Model context;
+        private readonly ModelContext context;
 
-        public KenshuDBHandler ()
+        public KenshuDBHandler()
         {
-            
+
         }
-        
+
         public void CreateNewMemberEntry(T_Member t_Member)
         {
             context.Members.Add(t_Member);
             context.SaveChanges();
 
         }
-        
-        
+
+
         public void CreateNewChargeEntry(T_Charge t_charge)
         {
             context.Charges.Add(t_charge);
-            context.SaveChanges ();
+            context.SaveChanges();
         }
 
-       
+
         public object SearchObjectInTableByID(int id, string table_name)
         {
             if (table_name == "Members")
@@ -49,10 +49,10 @@ namespace KenshuServiceForms.Database
             {
                 return null;
             }
-            
+
         }
 
-     
+
         public void UpdateEntryInTable(object entry, string table_name)
         {
             if (table_name == "Members")
@@ -90,8 +90,8 @@ namespace KenshuServiceForms.Database
             {
                 //TODO:throw potential exeption 
             }
-        
-            
+
+
         }
 
         public void DeleteEntryInTable(int id, string table_name)
@@ -107,7 +107,7 @@ namespace KenshuServiceForms.Database
             }
             else if (table_name == "Charge")
             {
-                
+
                 var chargeToUpdate = context.Charges.FirstOrDefault(m => m.charge_id == id);
                 if (chargeToUpdate != null)
                 {
@@ -120,7 +120,7 @@ namespace KenshuServiceForms.Database
                 //TODO:throw potential exeption 
             }
         }
-        
+
         public List<T_Member> SearchInMembers(string name, string email)
         {
             if (context.Members != null)
@@ -153,14 +153,15 @@ namespace KenshuServiceForms.Database
 
         }
         //TODO:Atomawashi
-        public void CreateBillingStatus() 
+        public void CreateBillingStatus()
         {
-        
+
         }
-        
-        public int? GetHighestIndex(string table) 
+
+        public int? GetHighestIndex(string table)
         {
-        switch (table) {
+            switch (table)
+            {
                 case "Members":
                     return context.Members.Any() ? context.Members.Max(p => p.member_id) : 0;
                 case "Charges":
@@ -171,6 +172,6 @@ namespace KenshuServiceForms.Database
 
             }
         }
-        
+
     }
 }
