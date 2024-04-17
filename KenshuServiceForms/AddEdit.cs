@@ -55,10 +55,21 @@ namespace KenshuServiceForms
         //TODO:Implement functions
         private void RegisterButtonAddEdit_Click(object sender, EventArgs e)
         {
-           member.mail = MailAddressTextBoxAddEdit.Text;
-           member.name = NameTextBoxAddEdit.Text;
-           member.address = AddressTextBoxAddEdit.Text;
-           
+
+            if (mode == "編集")
+            {
+                AssingValues();
+                handler.UpdateEntryInTable(member, "Members");
+            }
+            else if (mode == "新規追加")
+            {
+                AssingValues();
+                handler.CreateNewMemberEntry(member);
+            }
+            else
+            {
+                //TODO:Implement Error handling
+            }
 
             this.Close();
         }
@@ -66,6 +77,16 @@ namespace KenshuServiceForms
         private void CancelButtonAddEdit_Click(object sender, EventArgs e)
         {
             this.Close();   
+        }
+
+
+        private void AssingValues()
+        {
+            member.mail = MailAddressTextBoxAddEdit.Text;
+            member.name = NameTextBoxAddEdit.Text;
+            member.address = AddressTextBoxAddEdit.Text;
+            member.start_date = DateOnly.FromDateTime(JoinDatePickerAddEdit.Value.Date);
+            if (member.end_date != null) { member.end_date = DateOnly.FromDateTime(LeaveDatePickerAddEdit.Value.Date); }
         }
     }
 }
