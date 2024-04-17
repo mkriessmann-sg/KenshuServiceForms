@@ -15,7 +15,7 @@ namespace KenshuServiceForms
 
         public KenshuDBHandler()
         {
-
+            context = new ModelContext();
         }
 
         public void CreateNewMemberEntry(T_Member t_Member)
@@ -32,6 +32,10 @@ namespace KenshuServiceForms
             context.SaveChanges();
         }
 
+        public List<T_Charge> GetCharges()
+        {
+            return context.Charges.ToList();
+        }
 
         public object SearchObjectInTableByID(int id, string table_name)
         {
@@ -40,7 +44,7 @@ namespace KenshuServiceForms
                 return context.Members.FirstOrDefault(x => x.member_id == id);
 
             }
-            else if (table_name == "Charge")
+            else if (table_name == "Charges")
             {
                 return context.Charges.FirstOrDefault(x => x.charge_id == id);
 
@@ -105,7 +109,7 @@ namespace KenshuServiceForms
                     context.SaveChanges();
                 }
             }
-            else if (table_name == "Charge")
+            else if (table_name == "Charges")
             {
 
                 var chargeToUpdate = context.Charges.FirstOrDefault(m => m.charge_id == id);
@@ -123,22 +127,22 @@ namespace KenshuServiceForms
 
         public List<T_Member> SearchInMembers(string name, string email)
         {
-            //if (context.Members != null)
-            //{
-            //    IQueryable<T_Member> query = context.Members.AsQueryable();
+            if (context.Members != null)
+            {
+                IQueryable<T_Member> query = context.Members.AsQueryable();
 
 
-            //    if (name != null)
-            //    {
-            //        query = query.Where(m => m.name.Contains(name));
-            //    }
+                if (name != null)
+                {
+                    query = query.Where(m => m.name.Contains(name));
+                }
 
-            //    if (email != null)
-            //    {
-            //        query = query.Where(m => m.mail.Contains(email));
-            //    }
-            //    return query.ToList();
-            //}
+                if (email != null)
+                {
+                    query = query.Where(m => m.mail.Contains(email));
+                }
+                return query.ToList();
+            }
             return null;
 
         }

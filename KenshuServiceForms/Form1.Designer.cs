@@ -78,7 +78,7 @@
             result.TabIndex = 1;
             result.UseCompatibleStateImageBehavior = false;
             result.View = View.Details;
-            result.MouseClick += result_MouseClick;
+            result.MouseDoubleClick += result_MouseClick;
             // 
             // columnHeader1
             // 
@@ -126,6 +126,7 @@
             DeleteButton.TabIndex = 3;
             DeleteButton.Text = "削除";
             DeleteButton.UseVisualStyleBackColor = true;
+            DeleteButton.Click += DeleteButton_Click;
             // 
             // HomeMenuStrip
             // 
