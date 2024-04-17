@@ -189,7 +189,7 @@
             JoinDatePickerAddEdit.Name = "JoinDatePickerAddEdit";
             JoinDatePickerAddEdit.Size = new Size(174, 23);
             JoinDatePickerAddEdit.TabIndex = 23;
-            JoinDatePickerAddEdit.Value = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+            JoinDatePickerAddEdit.Value = new DateTime(2024, 4, 17, 0, 0, 0, 0);
             JoinDatePickerAddEdit.ValueChanged += JoinDatePickerAddEdit_ValueChanged;
             // 
             // LeaveDatePickerAddEdit
@@ -198,7 +198,7 @@
             LeaveDatePickerAddEdit.Name = "LeaveDatePickerAddEdit";
             LeaveDatePickerAddEdit.Size = new Size(174, 23);
             LeaveDatePickerAddEdit.TabIndex = 24;
-            LeaveDatePickerAddEdit.Value = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+            LeaveDatePickerAddEdit.Value = new DateTime(2024, 4, 17, 0, 0, 0, 0);
             LeaveDatePickerAddEdit.ValueChanged += LeaveDatePickerAddEdit_ValueChanged;
             // 
             // MailErrorLabelAddEdit

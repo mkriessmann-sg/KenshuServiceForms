@@ -10,52 +10,35 @@ namespace KenshuServiceForms
 {
     public class ModelContext : DbContext
     {
-
-        public DbSet<T_Member> Members { get; set; }
-        public DbSet<T_Charge> Charges { get; set; }
-        //public DbSet<T_Billing_Data> Billing_Data { get; set; }
-        //public DbSet<T_Billing_Detail_Data> Billing_Data_Detail { get; set; }
-        //public DbSet<T_Billing_Status> Billing_Status { get; set; }
-
-        //SQLite DB for testing
-        public string DbPath { get; }
-
         public ModelContext()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            DbPath = System.IO.Path.Join(path, "Model.db");
         }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-                => options.UseSqlite($"Data Source={DbPath}");
+        public DbSet<T_Member> Members { get; set; }
+        public DbSet<T_Charge> Charges { get; set; }
+        public DbSet<T_Billing_Data> Billing_Data { get; set; }
+        public DbSet<T_Billing_Detail_Data> Billing_Data_Detail { get; set; }
+        public DbSet<T_Billing_Status> Billing_Status { get; set; }
 
+        public ModelContext(DbContextOptions<ModelContext> options) : base(options)
+        {
+        }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<T_Billing_Data>()
+                .HasKey(bd => new { bd.billing_ym, bd.member_id });
 
+            modelBuilder.Entity<T_Billing_Detail_Data>()
+                .HasKey(bdd => new { bdd.billing_ym, bdd.member_id, bdd.charge_id });
 
-
-
-        //public ModelContext(DbContextOptions<ModelContext> options) : base(options)
-        //{
-        //}
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<T_Billing_Data>()
-        //        .HasKey(bd => new { bd.billing_ym, bd.member_id });
-
-        //    modelBuilder.Entity<T_Billing_Detail_Data>()
-        //        .HasKey(bdd => new { bdd.billing_ym, bdd.member_id, bdd.charge_id });
-
-        //}
-
-
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseNpgsql("Host=172.27.200.231;Port=5432;Database=kmarcodb;Username=kmarco;Password=kmarco");
-        //}
+        }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=172.27.200.231;Port=5432;Database=kmarcodb;Username=kmarco;Password=kmarco");
+        }
 
     }
     public class T_Member
@@ -85,54 +68,42 @@ namespace KenshuServiceForms
         //public DateTime? created_at { get; set; }
         //public DateTime? updated_at { get; set; }
     }
-    //public class T_Billing_Data
-    //{
-    //    //[Key]
-    //    //[Column(Order = 0)]
-    //    public DateOnly billing_ym { get; set; }
+    public class T_Billing_Data
+    {
 
-    //    //[Key]
-    //    //[Column(Order = 1)]
-    //    public int member_id { get; set; }
-
-    //    public string mail { get; set; }
-    //    public string name { get; set; }
-    //    public string address { get; set; }
-    //    public DateOnly member_start_date { get; set; }
-    //    public DateOnly member_end_date { get; set; }
-    //    public int payment_method { get; set; }
-    //    public int amount { get; set; }
-    //    public int tax_ratio { get; set; }
-    //    public int total { get; set; }
-    //    //public DateTime? created_at { get; set; }
-    //    //public DateTime? updated_at { get;set; }
-    //}
-    //public class T_Billing_Detail_Data
-    //{
-    //    //[Key]
-    //    //[Column(Order = 0)]
-    //    public DateOnly billing_ym { get; set; }
-
-    //    //[Key]
-    //    //[Column(Order = 1)]
-    //    public int member_id { get; set; }
-
-    //    //[Key]
-    //    //[Column(Order = 2)]
-    //    public int charge_id { get; set; }
-    //    public string name { get; set; }
-    //    public DateOnly start_date { get; set; }
-    //    public DateOnly end_date { get; set; }
-    //    //public DateTime? created_at { get; set; }
-    //    //public DateTime? updated_at { get; set; }
-    //}
-    //public class T_Billing_Status
-    //{
-    //    public DateOnly billing_ym { get; set; }
-    //    public bool is_commited { get; set; }
-    //    //public DateTime? created_at { get; set; }
-    //    //public DateTime? updated_at { get; set; }
-    //}
+        public DateOnly billing_ym { get; set; }
+        public int member_id { get; set; }
+        public string mail { get; set; }
+        public string name { get; set; }
+        public string address { get; set; }
+        public DateOnly member_start_date { get; set; }
+        public DateOnly member_end_date { get; set; }
+        public int payment_method { get; set; }
+        public int amount { get; set; }
+        public int tax_ratio { get; set; }
+        public int total { get; set; }
+        //public DateTime? created_at { get; set; }
+        //public DateTime? updated_at { get;set; }
+    }
+    public class T_Billing_Detail_Data
+    {
+        public DateOnly billing_ym { get; set; }
+        public int member_id { get; set; }
+        public int charge_id { get; set; }
+        public string name { get; set; }
+        public DateOnly start_date { get; set; }
+        public DateOnly end_date { get; set; }
+        //public DateTime? created_at { get; set; }
+        //public DateTime? updated_at { get; set; }
+    }
+    public class T_Billing_Status
+    {
+        [Key]
+        public DateOnly billing_ym { get; set; }
+        public bool is_commited { get; set; }
+        //public DateTime? created_at { get; set; }
+        //public DateTime? updated_at { get; set; }
+    }
 
 
 }
