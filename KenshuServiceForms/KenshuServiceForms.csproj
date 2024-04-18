@@ -17,7 +17,6 @@
   <ItemGroup>
     <Compile Remove="KenshuDBHandler.cs" />
     <Compile Remove="Model.cs" />
-    <Compile Remove="Program.cs" />
   </ItemGroup>
 
   <ItemGroup>
