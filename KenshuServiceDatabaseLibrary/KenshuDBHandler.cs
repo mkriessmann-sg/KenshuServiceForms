@@ -258,6 +258,31 @@ namespace KenshuServiceDatabaseLibrary
             }
         }
 
+        public List<T_Member> GetMembersByDate(DateOnly startDate, DateOnly endDate)
+        {
+
+            IQueryable<T_Member> query = context.Members.AsQueryable();
+
+
+            if (startDate != null && endDate != null)
+            {
+                query = query.Where(m =>(!m.end_date.HasValue && m.start_date < startDate) || (m.end_date < endDate && m.start_date < endDate ));
+            }
+            return query.ToList();
+        }
+        public List<T_Charge> GetChargesByDate(DateOnly startDate, DateOnly endDate)
+        {
+
+            IQueryable<T_Charge> query = context.Charges.AsQueryable();
+
+
+            if (startDate != null && endDate != null)
+            {
+                query = query.Where(m => (!m.endDate.HasValue && m.startDate < startDate) || (m.endDate < endDate && m.startDate < endDate));
+            }
+            return query.ToList();
+        }
+
         public void SaveChanges() { context.SaveChanges(); }
 
         public int? GetHighestIndex(string table)
