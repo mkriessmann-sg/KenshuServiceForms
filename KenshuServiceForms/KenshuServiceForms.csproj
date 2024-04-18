@@ -9,6 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Database\**" />
+    <EmbeddedResource Remove="Database\**" />
+    <None Remove="Database\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="KenshuDBHandler.cs" />
+    <Compile Remove="Model.cs" />
+    <Compile Remove="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
@@ -23,7 +36,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
+    <ProjectReference Include="..\KenshuServiceDatabaseLibrary\KenshuServiceDatabaseLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="KenshuServiceDatabaseLibrary" />
   </ItemGroup>
 
 </Project>
