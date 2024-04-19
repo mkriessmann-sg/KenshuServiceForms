@@ -13,8 +13,6 @@ namespace KenshuServiceDatabaseLibrary
         public ModelContext()
         {
         }
-
-
         public DbSet<T_Member> Members { get; set; }
         public DbSet<T_Charge> Charges { get; set; }
         public DbSet<T_Billing_Data> Billing_Data { get; set; }
@@ -32,18 +30,15 @@ namespace KenshuServiceDatabaseLibrary
 
             modelBuilder.Entity<T_Billing_Detail_Data>()
                 .HasKey(bdd => new { bdd.billing_ym, bdd.member_id, bdd.charge_id });
-
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Host=172.27.200.231;Port=5432;Database=kmarcodb;Username=kmarco;Password=kmarco");
         }
-
     }
     public class T_Member
-    {
-        
+    {        
         [Key]
         public int member_id { get; set; }
         [Column(TypeName = "VARCHAR")]
@@ -60,8 +55,6 @@ namespace KenshuServiceDatabaseLibrary
         public DateOnly start_date { get; set; }
         public DateOnly? end_date { get; set; }
         public int payment_method { get; set; }
-        //public DateTime? created_at { get; set; }
-        //public DateTime? modified_at { get;set; }
     }
     public class T_Charge
     {
@@ -75,12 +68,9 @@ namespace KenshuServiceDatabaseLibrary
         public int amount { get; set; }
         public DateOnly startDate { get; set; }
         public DateOnly? endDate { get; set; }
-        //public DateTime? created_at { get; set; }
-        //public DateTime? updated_at { get; set; }
     }
     public class T_Billing_Data
     {
-
         public DateOnly billing_ym { get; set; }
         public int member_id { get; set; }
         [Column(TypeName = "VARCHAR")]
@@ -101,8 +91,6 @@ namespace KenshuServiceDatabaseLibrary
         public double tax_ratio { get; set; }
         [Range(0, 999999999)]
         public int total { get; set; }
-        //public DateTime? created_at { get; set; }
-        //public DateTime? updated_at { get;set; }
     }
     public class T_Billing_Detail_Data
     {
@@ -116,16 +104,12 @@ namespace KenshuServiceDatabaseLibrary
         public int? amount { get; set; }
         public DateOnly start_date { get; set; }
         public DateOnly? end_date { get; set; }
-        //public DateTime? created_at { get; set; }
-        //public DateTime? updated_at { get; set; }
     }
     public class T_Billing_Status
     {
         [Key]
         public DateOnly billing_ym { get; set; }
         public bool is_commited { get; set; }
-        //public DateTime? created_at { get; set; }
-        //public DateTime? updated_at { get; set; }
     }
 
 

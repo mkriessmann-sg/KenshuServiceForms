@@ -15,7 +15,7 @@ namespace KenshuServiceForms
         bool startSelected = false;
         bool endSelected = false;
         string mode;
-        T_Member? member;
+        T_Member member;
         KenshuDBHandler handler = new KenshuDBHandler();
         public AddEdit(string _mode, int? _memberID)
         {
@@ -28,9 +28,6 @@ namespace KenshuServiceForms
                 member = (T_Member)handler.SearchObjectInTableByID(Convert.ToInt32(memberID), "Members");
             }
         }
-
-
-        //implement mode 
         private void AddEdit_Load(object sender, EventArgs e)
         {
             if (mode == "編集")
@@ -49,13 +46,7 @@ namespace KenshuServiceForms
                 member.member_id = 1 + Convert.ToInt32(handler.GetHighestIndex("Members"));
                 MemberIDTextLabelAddEdit.Text = Convert.ToString(member.member_id);
             }
-            else
-            {
-                //TODO:Implement Error handling
-            }
-
         }
-        //TODO:Implement functions
         private void RegisterButtonAddEdit_Click(object sender, EventArgs e)
         {
 
@@ -76,13 +67,10 @@ namespace KenshuServiceForms
                 }
             }
         }
-
         private void CancelButtonAddEdit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-
         private bool AssingValues()
         {
             bool success = true;
@@ -172,15 +160,12 @@ namespace KenshuServiceForms
                 PaymentMethodErrorLabelAddEdit.Text = "必須です";
                 PaymentMethodErrorLabelAddEdit.Visible = true;
             }
-
             return success;
         }
-
         private void JoinDatePickerAddEdit_ValueChanged(object sender, EventArgs e)
         {
             startSelected = true;
         }
-
         private void LeaveDatePickerAddEdit_ValueChanged(object sender, EventArgs e)
         {
             endSelected = true;

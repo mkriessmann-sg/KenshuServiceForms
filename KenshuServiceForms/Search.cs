@@ -33,12 +33,6 @@ namespace KenshuServiceForms
                 this.Close();
             }
         }
-
-        private void MailSearchBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private bool parse()
         {
             bool success = true;
@@ -67,8 +61,6 @@ namespace KenshuServiceForms
                 NameErrorLabelSearch.Visible = true;
                 success = false;
             }
-
-
             return success;
         }
     }

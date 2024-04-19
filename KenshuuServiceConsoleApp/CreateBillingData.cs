@@ -21,6 +21,9 @@ namespace KenshuuServiceConsoleApp
         static KenshuDBHandler handler = new KenshuDBHandler();
         static DateOnly date;
         static DateOnly dateEnd;
+        static int billingDataCounter = 0;
+        static int billingDetailsCounter = 0;
+        static int billingStatusCounter = 0;
         
 
         static void Main(string[] args)
@@ -41,10 +44,8 @@ namespace KenshuuServiceConsoleApp
                         if (IsValidDate(options.Date))
                         {
                             Console.WriteLine($"Date provided: {options.Date}");
-                            //Main programme
                             //TODO:fix this madness
                             string temp = options.Date + "01";
-                            //date = DateOnly.Parse(temp);
                             date = DateOnly.ParseExact(temp, "yyyyMMdd", CultureInfo.InvariantCulture);
                             dateEnd = new DateOnly(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month));
                             Console.WriteLine("Start Date:" + date + "EndDate:" + dateEnd);
@@ -76,20 +77,26 @@ namespace KenshuuServiceConsoleApp
             
             if (CheckForAbsenceOfData())
             {
-                
+                Console.WriteLine("----------------------------------------");
                 handler.DeleteDesignatedDateData(date);
-                Console.WriteLine("Creaing new Data");
+                Console.WriteLine("データベースから{0}年{1}月分の未確定請求情報を削除しました", date.Year, date.Month);
                 CreateData();
                 handler.SaveChanges();
+                Console.WriteLine("{0}年{1}月分の請求ステータス情報を追加しています。", date.Year, date.Month);
+                Console.WriteLine("{0}件追加しました。", billingStatusCounter);
+                Console.WriteLine("{0}年{1}月分の請求データ情報を追加しています。", date.Year, date.Month);
+                Console.WriteLine("{0}件追加しました。", billingDataCounter);
+                Console.WriteLine("{0}年{1}月分の請求明細データ情報を追加しています。", date.Year, date.Month);
+                Console.WriteLine("{0}件追加しました。", billingDetailsCounter);
+                Console.WriteLine("----------------------------------------");
             }
         }
 
        static private bool CheckForAbsenceOfData()
         {
-            List<T_Billing_Status> tenativeData =  handler.GetT_Billing_Statuses(date);
+            List<T_Billing_Status>? tenativeData =  handler.GetT_Billing_Statuses(date);
             if (tenativeData != null)
             {
-                Console.WriteLine("Data absent executing");
                 return true;
             }
             else
@@ -98,7 +105,7 @@ namespace KenshuuServiceConsoleApp
                 if (tenativeData.Count != 1)
                 {
                     {
-                        Console.WriteLine("Multiple status data returned");
+                        Console.WriteLine("エラー：指定されている年月にい複数の請求ステータスが存在します。");
                         return false;
                     }
                 }
@@ -106,11 +113,9 @@ namespace KenshuuServiceConsoleApp
                 {
                     foreach  (T_Billing_Status b in tenativeData)
                     {
-                        if (b.is_commited) { Console.WriteLine("Data already comitted"); return false; }
-                        else { Console.WriteLine("Data flagged false executing"); return true; }
-
-                    }
-                    
+                        if (b.is_commited) { Console.WriteLine("エラー：指定されている年月のデータが既に確定しています。"); return false; }
+                        else { Console.WriteLine("未確定のデータが検知されているます。上書きします。"); return true; }
+                    }    
                 }
             }
             return false;
@@ -126,9 +131,7 @@ namespace KenshuuServiceConsoleApp
             foreach (T_Member t in t_Members)
             {
                 T_Billing_Data b = new T_Billing_Data();
-                //KEY
                 b.member_id = t.member_id;
-                //KEY
                 b.billing_ym = date;
                 b.mail = t.mail;
                 b.name = t.name;
@@ -136,7 +139,6 @@ namespace KenshuuServiceConsoleApp
                 b.member_start_date = (DateOnly)t.start_date;
                 b.member_end_date = t.end_date;
                 b.payment_method = t.payment_method;
-
                 int total= 0;
                 foreach (T_Charge charge in charges)
                 {
@@ -150,21 +152,21 @@ namespace KenshuuServiceConsoleApp
                     d.amount = charge.amount;
                     d.start_date = charge.startDate;
                     d.end_date = charge.endDate;
-                    Console.WriteLine("Creating billing details: Year:" + d.billing_ym +"MemberID" + d.member_id+ "chargeID:" + d.charge_id );
                     handler.CreateBillingDetails(d);
+                    billingDetailsCounter++;    
                 }
                 b.amount = total;
                 b.tax_ratio = 10.00;
                 b.total = Convert.ToInt32(b.tax_ratio + b.amount);
-                Console.WriteLine("Creating billing data: Year:" + b.billing_ym + "MemberID" + b.member_id);
                 handler.CreateBillingData(b);
+                billingDataCounter++;
             }
              
             T_Billing_Status status = new T_Billing_Status();
             status.billing_ym = date;
             status.is_commited = false;
             handler.CreateBillingStatus(status);
-
+            billingStatusCounter++;
 
         }
     }

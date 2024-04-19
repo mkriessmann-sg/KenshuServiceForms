@@ -3,20 +3,17 @@ namespace KenshuServiceForms
     public partial class Form1 : Form
     {
 
-        public string name = null;
-        public string email = null;
+        public string? name = null;
+        public string? email = null;
         List<T_Member> currentMembers = new List<T_Member>();
         private void Form1_Load(object sender, EventArgs e)
         {
             UpdateList();
-
         }
         public Form1()
         {
             InitializeComponent();
-
         }
-
         private void UpdateList()
         {
 
@@ -50,14 +47,12 @@ namespace KenshuServiceForms
             search.ShowDialog();
             UpdateList();
         }
-
         private void AddButton_Click(object sender, EventArgs e)
         {
             AddEdit addEdit = new AddEdit("êVãKí«â¡", null);
             addEdit.ShowDialog();
             UpdateList();
         }
-
         private void ClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             email = null;
@@ -76,7 +71,6 @@ namespace KenshuServiceForms
             charges.ShowDialog();
             UpdateList();
         }
-        //TODO:implement selection 
         private void result_MouseClick(object sender, MouseEventArgs e)
         {
             int selectedMemberID = 0;
@@ -89,7 +83,6 @@ namespace KenshuServiceForms
             addEdit.ShowDialog();
             UpdateList();
         }
-
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             int selectedMemberID = 0;

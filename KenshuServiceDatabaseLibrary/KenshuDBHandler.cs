@@ -26,8 +26,6 @@ namespace KenshuServiceDatabaseLibrary
             context.SaveChanges();
 
         }
-
-
         public void CreateNewChargeEntry(T_Charge t_charge)
         {
             context.Charges.Add(t_charge);
@@ -55,9 +53,7 @@ namespace KenshuServiceDatabaseLibrary
             {
                 return null;
             }
-
         }
-
 
         public void UpdateEntryInTable(object entry, string table_name)
         {
@@ -65,7 +61,7 @@ namespace KenshuServiceDatabaseLibrary
             {
                 T_Member member = (T_Member)entry;
                 context.Members.FirstOrDefault(x => x.member_id == member.member_id);
-                T_Member memberToUpdate = context.Members.FirstOrDefault(m => m.member_id == member.member_id);
+                T_Member? memberToUpdate = context.Members.FirstOrDefault(m => m.member_id == member.member_id);
                 if (memberToUpdate != null)
                 {
                     memberToUpdate.name = member.name;
@@ -92,12 +88,6 @@ namespace KenshuServiceDatabaseLibrary
                     context.SaveChanges();
                 }
             }
-            else
-            {
-                //TODO:throw potential exeption 
-            }
-
-
         }
 
         public void DeleteEntryInTable(int id, string table_name)
@@ -120,10 +110,6 @@ namespace KenshuServiceDatabaseLibrary
                     context.Charges.Remove(chargeToUpdate);
                     context.SaveChanges();
                 }
-            }
-            else
-            {
-                //TODO:throw potential exeption 
             }
         }
 
@@ -148,17 +134,14 @@ namespace KenshuServiceDatabaseLibrary
             return null;
 
         }
-        //TODO:Atomawashi
         public void CreateBillingDetails(T_Billing_Detail_Data _Billing_Detail_Data)
         {
             context.Billing_Data_Detail.Add(_Billing_Detail_Data);
         }
-        //TODO:Atomawashi
         public void CreateBillingData(T_Billing_Data _Billing_Data)
         {
             context.Billing_Data.Add(_Billing_Data);
         }
-        //TODO:Atomawashi
         public void CreateBillingStatus(T_Billing_Status _Billing_Status)
         {
             context.Billing_Status.Add(_Billing_Status);
@@ -179,25 +162,6 @@ namespace KenshuServiceDatabaseLibrary
             }
             return null;
         }
-
-        //Shelved approach
-        //public List<T_Billing_Status> GetT_Billing_Data(DateOnly _requestedDate)
-        //{
-        //    if (context.Billing_Status != null)
-        //    {
-        //        IQueryable<T_Billing_Status> query = context.Billing_Status.AsQueryable();
-
-
-        //        if (_requestedDate != null)
-        //        {
-        //            query = query.Where(m => m.billing_ym == _requestedDate);
-        //        }
-        //        return query.ToList();
-        //    }
-        //    return null;
-        //}
-
-        //Less flexible but faster approach
         public void DeleteDesignatedDateData( DateOnly _requestedDate)
         {
             if (context.Billing_Data != null)
@@ -258,7 +222,6 @@ namespace KenshuServiceDatabaseLibrary
                 }
             }
         }
-
         public List<T_Member> GetMembersByDate(DateOnly startDate, DateOnly endDate)
         {
 
@@ -268,9 +231,6 @@ namespace KenshuServiceDatabaseLibrary
             if (startDate != null && endDate != null)
             {
                 query = query.Where(m => (m.start_date < endDate && (m.end_date >= startDate || !m.end_date.HasValue)));
-
-                //disfuctional inverted query
-                //query = query.Where(m => (m.start_date < startDate || m.end_date < startDate) && (m.start_date > endDate || m.end_date > endDate) && (m.start_date > endDate || !m.end_date.HasValue));
             }
             return query.ToList();
         }
@@ -283,10 +243,6 @@ namespace KenshuServiceDatabaseLibrary
             if (startDate != null && endDate != null)
             {
                 query = query.Where(m => (m.startDate < endDate && (m.endDate >= startDate ||!m.endDate.HasValue)));
-                
-                
-                //disfunctional inverted query
-                //query = query.Where(m => (m.startDate < startDate || m.endDate < startDate) && (m.startDate > endDate || m.endDate > endDate) && (m.startDate > endDate|| !m.endDate.HasValue));
             }
             return query.ToList();
         }
@@ -303,8 +259,6 @@ namespace KenshuServiceDatabaseLibrary
                     return context.Charges.Any() ? context.Charges.Max(p => p.charge_id) : 0;
                 default:
                     return null;
-
-
             }
         }
 

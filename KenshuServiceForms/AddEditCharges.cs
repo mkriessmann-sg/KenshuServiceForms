@@ -38,17 +38,11 @@ namespace KenshuServiceForms
                 charge = new T_Charge();
                 charge.charge_id = 1 + Convert.ToInt32(handler.GetHighestIndex("Charges"));
             }
-            else
-            {
-                //TODO:Implement Error handling
-            }
         }
-
         private void CancelButtonAddEdit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        //TODO: Implement Function
         private void SaveButtonAddEditCharges_Click(object sender, EventArgs e)
         {
             if (mode == "編集")
@@ -67,12 +61,6 @@ namespace KenshuServiceForms
                     this.Close();
                 }
             }
-            else
-            {
-                //TODO:Implement Error handling
-            }
-
-            
         }
 
         private bool AssingValues()
@@ -128,12 +116,10 @@ namespace KenshuServiceForms
 
             return success;
         }
-
         private void StartDatePickerAddEditCharges_ValueChanged(object sender, EventArgs e)
         {
             startSelected = true;
         }
-
         private void EndDatePickerAddEditCharges_ValueChanged(object sender, EventArgs e)
         {
             endSelected = true;

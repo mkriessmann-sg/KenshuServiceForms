@@ -40,8 +40,6 @@ namespace KenshuServiceForms
                 }
             }
             ChargesView.Refresh();
-
-
         }
 
         private void ChargesCloseButton_Click(object sender, EventArgs e)
@@ -66,7 +64,6 @@ namespace KenshuServiceForms
             handler.DeleteEntryInTable(selectedChargeID, "Charges");
             UpdateChargesList();
         }
-
         private void ChargesView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int selectedChargeID = 0;
@@ -74,7 +71,6 @@ namespace KenshuServiceForms
             {
                 selectedChargeID = Convert.ToInt16(item.Text);
             }
-
             ChargesAddEdit addEditCharge = new ChargesAddEdit("編集", selectedChargeID);
             addEditCharge.ShowDialog();
             UpdateChargesList();
