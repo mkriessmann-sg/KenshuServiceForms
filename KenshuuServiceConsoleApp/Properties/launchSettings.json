@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "KenshuuServiceConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "-d 202404"
+    }
+  }
+}

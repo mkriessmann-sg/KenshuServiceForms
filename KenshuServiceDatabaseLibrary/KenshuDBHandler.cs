@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
@@ -64,7 +65,7 @@ namespace KenshuServiceDatabaseLibrary
             {
                 T_Member member = (T_Member)entry;
                 context.Members.FirstOrDefault(x => x.member_id == member.member_id);
-                var memberToUpdate = context.Members.FirstOrDefault(m => m.member_id == member.member_id);
+                T_Member memberToUpdate = context.Members.FirstOrDefault(m => m.member_id == member.member_id);
                 if (memberToUpdate != null)
                 {
                     memberToUpdate.name = member.name;
@@ -77,7 +78,7 @@ namespace KenshuServiceDatabaseLibrary
                     context.SaveChanges();
                 }
             }
-            else if (table_name == "Charge")
+            else if (table_name == "Charges")
             {
                 T_Charge charge = (T_Charge)entry;
                 context.Charges.FirstOrDefault(x => x.charge_id == charge.charge_id);
@@ -135,12 +136,12 @@ namespace KenshuServiceDatabaseLibrary
 
                 if (name != null)
                 {
-                    query = query.Where(m => m.name.Contains(name));
+                    query = query.Where(m => m.name.ToLower().Contains(name.ToLower())) ;
                 }
 
                 if (email != null)
                 {
-                    query = query.Where(m => m.mail.Contains(email));
+                    query = query.Where(m => m.mail.ToLower().Contains(email.ToLower()));
                 }
                 return query.ToList();
             }
@@ -209,7 +210,7 @@ namespace KenshuServiceDatabaseLibrary
                     query = query.Where(m => m.billing_ym == _requestedDate);
                     if (query != null)
                     {
-                        foreach (IQueryable<T_Billing_Data> b in query)
+                        foreach (T_Billing_Data b in query)
                         {
                             var datatodelete = b as T_Billing_Data;
                             context.Billing_Data.Remove(datatodelete);
@@ -228,9 +229,9 @@ namespace KenshuServiceDatabaseLibrary
                     query = query.Where(m => m.billing_ym == _requestedDate);
                     if (query != null)
                     {
-                        foreach (IQueryable<T_Billing_Data> b in query)
+                        foreach (T_Billing_Detail_Data b in query)
                         {
-                            var datatodelete = b as T_Billing_Detail_Data;
+                            var datatodelete = b ;
                             context.Billing_Data_Detail.Remove(datatodelete);
                         }
                     }
@@ -247,9 +248,9 @@ namespace KenshuServiceDatabaseLibrary
                     query = query.Where(m => m.billing_ym == _requestedDate);
                     if (query != null)
                     {
-                        foreach (IQueryable<T_Billing_Status> b in query)
+                        foreach (T_Billing_Status b in query)
                         {
-                            var datatodelete = b as T_Billing_Status;
+                            var datatodelete = b;
                             context.Billing_Status.Remove(datatodelete);
                         }
                     }
@@ -266,7 +267,10 @@ namespace KenshuServiceDatabaseLibrary
 
             if (startDate != null && endDate != null)
             {
-                query = query.Where(m =>(!m.end_date.HasValue && m.start_date < startDate) || (m.end_date < endDate && m.start_date < endDate ));
+                query = query.Where(m => (m.start_date < endDate && (m.end_date >= startDate || !m.end_date.HasValue)));
+
+                //disfuctional inverted query
+                //query = query.Where(m => (m.start_date < startDate || m.end_date < startDate) && (m.start_date > endDate || m.end_date > endDate) && (m.start_date > endDate || !m.end_date.HasValue));
             }
             return query.ToList();
         }
@@ -278,7 +282,11 @@ namespace KenshuServiceDatabaseLibrary
 
             if (startDate != null && endDate != null)
             {
-                query = query.Where(m => (!m.endDate.HasValue && m.startDate < startDate) || (m.endDate < endDate && m.startDate < endDate));
+                query = query.Where(m => (m.startDate < endDate && (m.endDate >= startDate ||!m.endDate.HasValue)));
+                
+                
+                //disfunctional inverted query
+                //query = query.Where(m => (m.startDate < startDate || m.endDate < startDate) && (m.startDate > endDate || m.endDate > endDate) && (m.startDate > endDate|| !m.endDate.HasValue));
             }
             return query.ToList();
         }

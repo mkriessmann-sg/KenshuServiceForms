@@ -43,16 +43,23 @@ namespace KenshuServiceDatabaseLibrary
     }
     public class T_Member
     {
+        
         [Key]
         public int member_id { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(256)]
         [Required]
         public string mail { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(32)]
         [Required]
-        public string? name { get; set; }
-        public string? address { get; set; }
-        public DateOnly? start_date { get; set; }
+        public string name { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(256)]
+        public string address { get; set; }
+        public DateOnly start_date { get; set; }
         public DateOnly? end_date { get; set; }
-        public int? payment_method { get; set; }
+        public int payment_method { get; set; }
         //public DateTime? created_at { get; set; }
         //public DateTime? modified_at { get;set; }
     }
@@ -60,10 +67,13 @@ namespace KenshuServiceDatabaseLibrary
     {
         [Key]
         public int charge_id { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(64)]
         [Required]
         public string charge_name { get; set; }
-        public int? amount { get; set; }
-        public DateOnly? startDate { get; set; }
+        [Range(0, 999999999)]
+        public int amount { get; set; }
+        public DateOnly startDate { get; set; }
         public DateOnly? endDate { get; set; }
         //public DateTime? created_at { get; set; }
         //public DateTime? updated_at { get; set; }
@@ -73,14 +83,23 @@ namespace KenshuServiceDatabaseLibrary
 
         public DateOnly billing_ym { get; set; }
         public int member_id { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(256)]
         public string mail { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(32)]
         public string name { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(256)]
         public string address { get; set; }
         public DateOnly member_start_date { get; set; }
-        public DateOnly member_end_date { get; set; }
+        public DateOnly? member_end_date { get; set; }
         public int payment_method { get; set; }
+        [Range(0, 999999999)]
         public int amount { get; set; }
-        public int tax_ratio { get; set; }
+        [RegularExpression(@"^\d{1,3}(\.\d{1,2})?$", ErrorMessage = "Invalid format")]
+        public double tax_ratio { get; set; }
+        [Range(0, 999999999)]
         public int total { get; set; }
         //public DateTime? created_at { get; set; }
         //public DateTime? updated_at { get;set; }
@@ -90,9 +109,13 @@ namespace KenshuServiceDatabaseLibrary
         public DateOnly billing_ym { get; set; }
         public int member_id { get; set; }
         public int charge_id { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(64)]
         public string name { get; set; }
+        [Range(0, 999999999)]
+        public int? amount { get; set; }
         public DateOnly start_date { get; set; }
-        public DateOnly end_date { get; set; }
+        public DateOnly? end_date { get; set; }
         //public DateTime? created_at { get; set; }
         //public DateTime? updated_at { get; set; }
     }

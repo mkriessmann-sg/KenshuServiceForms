@@ -112,7 +112,7 @@ namespace KenshuServiceForms
             {
                 if (NameTextBoxAddEdit.Text.Length < 21)
                 {
-                    member.mail = MailAddressTextBoxAddEdit.Text;
+                    member.name = NameTextBoxAddEdit.Text;
                     NameErrorLabelAddEdit.Visible = false;
                 }
                 else
@@ -121,7 +121,6 @@ namespace KenshuServiceForms
                     NameErrorLabelAddEdit.Text = "氏名は20文字までです";
                     NameErrorLabelAddEdit.Visible = true;
                 }
-
             }
             else
             {
@@ -131,10 +130,10 @@ namespace KenshuServiceForms
             }
             if (!string.IsNullOrEmpty(AddressTextBoxAddEdit.Text))
             {
-                if (AddressTextBoxAddEdit.Text.Length> 256)
+                if (AddressTextBoxAddEdit.Text.Length < 256)
                 {
-                    member.address = MailAddressTextBoxAddEdit.Text;
-                    NameErrorLabelAddEdit.Visible = false;
+                    member.address = AddressTextBoxAddEdit.Text;
+                    AddressErrorLabelAddEdit.Visible = false;
                 }
                 else
                 {

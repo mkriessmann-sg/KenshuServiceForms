@@ -77,7 +77,7 @@ namespace KenshuServiceForms
 
         private bool AssingValues()
         {
-            bool success = false;
+            bool success = true;
             if (!string.IsNullOrEmpty(ChargeNameTextBoxAddEditCharges.Text))
             {
                 charge.charge_name = ChargeNameTextBoxAddEditCharges.Text;
@@ -131,12 +131,12 @@ namespace KenshuServiceForms
 
         private void StartDatePickerAddEditCharges_ValueChanged(object sender, EventArgs e)
         {
-            bool startSelected = true;
+            startSelected = true;
         }
 
         private void EndDatePickerAddEditCharges_ValueChanged(object sender, EventArgs e)
         {
-            bool endSelected = true;
+            endSelected = true;
         }
     }
 }
